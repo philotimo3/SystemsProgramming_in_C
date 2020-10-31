@@ -1,8 +1,10 @@
-/*
+/* Lab # 7 (could work with another person from class on this one)
+
     @Authors - Hope Diamontopolous and Daniel Gitahi
     ______________________________________________________________
-    It will be a game to see how fast you can type a string that you yourself define
-.
+    It will be a game to see how fast you can type a string that you yourself define.
+    
+    Requirements...
 
     1. Ask the user to enter their name or any other string (Must handle multiple word strings!!!)
     2. capture the epoch time in seconds and the corresponding nanoseconds
