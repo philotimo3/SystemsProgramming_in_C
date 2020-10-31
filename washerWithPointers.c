@@ -1,72 +1,77 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2511
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red200\green20\blue201;\red180\green36\blue25;\red0\green0\blue0;
-\red64\green11\blue217;\red47\green180\blue29;\red193\green101\blue28;}
-{\*\expandedcolortbl;;\cssrgb\c83396\c23075\c82664;\cssrgb\c76409\c21698\c12524;\csgray\c0;
-\cssrgb\c32308\c18668\c88227;\cssrgb\c20238\c73898\c14947;\cssrgb\c80553\c47366\c13835;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+/* Lab # 6
 
-\f0\fs22 \cf2 \CocoaLigature0 #include \cf3 <stdio.h>\cf4 \
-\cf2 #include \cf3 <stdlib.h>\cf4 \
-\
-\cf2 #define PI \cf3 3.14159\cf2  \cf5 /* pi is the ratio of the diameter and circumference of a circle*/\cf4 \
-\
-\cf6 int\cf4  main()\
-\{\
-  \cf5 /*printf(\cf3 "%5f\cf2 \\n\cf3 "\cf5 ,PI);*/\cf4 \
-        \cf5 //gives me memory\cf4 \
-  \cf6 float\cf4  *innerD = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 float\cf4  *outerD = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 float\cf4  *thickness = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 float\cf4  *density = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 float\cf4  *rim = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 float\cf4  *weight = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 float\cf4  *batchweight = malloc(\cf7 sizeof\cf4 (\cf6 float\cf4 ));\
-  \cf6 int\cf4  *numwashers = malloc(\cf7 sizeof\cf4 (\cf6 int\cf4 ));\
-  \cf5 //** rimPointer;\cf4 \
-  \cf5 //** weightPointer;\cf4 \
-  \cf5 //** batchweightPointer;\cf4 \
-  \cf6 float\cf4  ** rimPointer = &rim;\
-  \cf6 float\cf4  ** weightPointer = &weight;\
-  \cf6 float\cf4  ** batchweightPointer = &batchweight;\
-  \cf5 /* innerD = inner diameter in cm */\cf4 \
-  \cf5 /* outerD = outer diameter in cm */\cf4 \
-  \cf5 /* comment out the rest of variables */\cf4 \
-\
-  \cf5 //prompting user for inner diameter of the washer in centimeters\cf4 \
-  printf(\cf3 "Enter the inner diameter of the washer in centimeters: "\cf4 );\
-  \cf5 //don't need & because innerD is a pointer / holds an address\cf4 \
-  scanf(\cf3 "\cf2 %f\cf3 "\cf4 ,innerD);\
-\
-  \cf5 //prompting the user for the outer diameter of the washer in centimeters\cf4 \
-  printf(\cf3 "Enter the outer diameter of the washer in centimeters: "\cf4 );\
-  \cf5 //don't need & because outerD is a pointer / holds an address\cf4 \
-  scanf(\cf3 "\cf2 %f\cf3 "\cf4 ,outerD);\
-\
-  \cf5 //prompting the user for the width/thickness of the washer in centimeters\cf4 \
-  printf(\cf3 "Enter the width/thickness of the washer in centimeters: "\cf4 );\
-  \cf5 //don't need & because thickness is a pointer / holds an address\cf4 \
-  scanf(\cf3 "\cf2 %f\cf3 "\cf4 ,thickness);\
-\
-  \cf5 //prompting the user for the density of the washer\\'s material in grams per cubic centimeter\cf4 \
-  printf(\cf3 "Enter the density of the washer\cf2 \\'\cf3 s material in grams per cubic centimeter: "\cf4 );\
-  \cf5 //don't need & because density is a pointer / holds an address\cf4 \
-  scanf(\cf3 "\cf2 %f\cf3 "\cf4 ,density);\
-\
-  \cf5 //prompting the user for the number of washers\cf4 \
-  printf(\cf3 "How many washers do you have: "\cf4 );\
-  \cf5 //don't need & because numwashers is a pointer / holds an address\cf4 \
-  scanf(\cf3 "\cf2 %i\cf3 "\cf4 ,numwashers);\
-\
-  *rim = ((*outerD/\cf3 2\cf4 )*(*outerD/\cf3 2\cf4 )*PI-(*innerD/\cf3 2\cf4 )*(*innerD/\cf3 2\cf4 )*PI);\
-\
-  *weight = (*rim)*(*thickness)*(*density);\
-\
-  *batchweight = *weight*(*numwashers);\
-\
-  printf(\cf3 "\cf2 \\n\cf3 "\cf4 );\
-  printf(\cf3 "rim area=\cf2 %-10.5f\cf3  square centimeters \cf2 \\n\cf3 "\cf4 , *rim);\
-  printf(\cf3 "weight of washer=\cf2 %-10.5f\cf3  grams \cf2 \\n\cf3 "\cf4 , *weight);\
-  printf(\cf3 "weight of all washer=\cf2 %-10.5f\cf3  grams \cf2 \\n\cf3 "\cf4 , *batchweight);\
-\}}
+Redo of Lab #1 using pointers
+
+All variables can be entered the same way it was done in lab #1
+
+However, you MUST...
+
+Use a pointer instead of the variables for all calculations (example.. .*p....please don't name your variable "p"...it's a single letter) 
+
+Use a pointer to a pointer for all print operations (example... **q....please don't name your variable "q"...it's a single letter) 
+
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define PI 3.14159 /* pi is the ratio of the diameter and circumference of a circle*/
+
+int main()
+{
+  /*printf("%5f\n",PI);*/
+        //gives me memory
+  float *innerD = malloc(sizeof(float));
+  float *outerD = malloc(sizeof(float));
+  float *thickness = malloc(sizeof(float));
+  float *density = malloc(sizeof(float));
+  float *rim = malloc(sizeof(float));
+  float *weight = malloc(sizeof(float));
+  float *batchweight = malloc(sizeof(float));
+  int *numwashers = malloc(sizeof(int));
+  //** rimPointer;
+  //** weightPointer;
+  //** batchweightPointer;
+  float ** rimPointer = &rim;
+  float ** weightPointer = &weight;
+  float ** batchweightPointer = &batchweight;
+  /* innerD = inner diameter in cm */
+  /* outerD = outer diameter in cm */
+  /* comment out the rest of variables */
+
+  //prompting user for inner diameter of the washer in centimeters
+  printf("Enter the inner diameter of the washer in centimeters: ");
+  //don't need & because innerD is a pointer / holds an address
+  scanf("%f",innerD);
+
+  //prompting the user for the outer diameter of the washer in centimeters
+  printf("Enter the outer diameter of the washer in centimeters: ");
+  //don't need & because outerD is a pointer / holds an address
+  scanf("%f",outerD);
+
+  //prompting the user for the width/thickness of the washer in centimeters
+  printf("Enter the width/thickness of the washer in centimeters: ");
+  //don't need & because thickness is a pointer / holds an address
+  scanf("%f",thickness);
+
+  //prompting the user for the density of the washer\'s material in grams per cubic centimeter
+  printf("Enter the density of the washer\'s material in grams per cubic centimeter: ");
+  //don't need & because density is a pointer / holds an address
+  scanf("%f",density);
+
+  //prompting the user for the number of washers
+  printf("How many washers do you have: ");
+  //don't need & because numwashers is a pointer / holds an address
+  scanf("%i",numwashers);
+
+  *rim = ((*outerD/2)*(*outerD/2)*PI-(*innerD/2)*(*innerD/2)*PI);
+
+  *weight = (*rim)*(*thickness)*(*density);
+
+  *batchweight = *weight*(*numwashers);
+
+  printf("\n");
+  printf("rim area=%-10.5f square centimeters \n", *rim);
+  printf("weight of washer=%-10.5f grams \n", *weight);
+  printf("weight of all washer=%-10.5f grams \n", *batchweight);
+}
