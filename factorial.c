@@ -1,3 +1,15 @@
+/*
+Lab # 2
+Directions:
+•Start by asking the user to enter a number between 1 and 15
+•Check if the user has complied.
+•Keep asking the user for a number between 1 and 15 until the user complies.
+•Then ask if recursion is desired or not.
+–If recursion is not desired call a function to calculate N! (where N is the number entered)
+–If recursion is required call a recursive function to calculate N! (where N is the number entered)
+*/
+
+
 #include <stdio.h>
 // calculating factorial recursively 
 long long int recursiveFactorial(int userNum) { // broke at 13  w/o long long int
