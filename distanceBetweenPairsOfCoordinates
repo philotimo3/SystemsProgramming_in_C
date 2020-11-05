@@ -1,0 +1,103 @@
+/* Lab #8
+In this lab we will be reinforcing our understanding of a number of concepts in C...arrays, struct, conditions, loops and loop controls
+
+- Allow the user to enter multiple pairs of x and y coordinates on a 2 dimensional graph (these numbers may be considered unitless) along with a text label for that set of points. You must use a "struct" data type to define how these are stored.
+- The x and y coordinates should be type "float" or "double"
+- Allow multiple data points to be entered by the user, so the first thing the user must ask is how many coordinates  will be entered. Since multiple entries will be made you must create an array of that "struct" type.
+- Once all of the coordinates and labels are entered, calculate the distance between each set of points (you DO NOT have to store all of the distances!!!).  In this lab you may use "math.h" (it may be useful).
+- Determine which coordinates are closest to each other out of all of the pairs.
+- Determine which coordinates are furthest from each other out of all of the pairs.
+NOTE!!!! There will be a 10 point value for efficiency. Please contemplate the BEST way to do this MOST efficiently. Brute-force is fine, but do better somehow!!!
+- Output the text label, and their corresponding relative distances, for the two closest coordinates and two most distant coordinates (if there is a tie, it is OK to report the last one with the "Winning" proximities...no need to report both or all of them....however, if you would like to handle ties it may be a fun exercise) 
+
+Data scrubbing
+
+1. users must enter positive coordinates for both x and y and, of course, they must be actual numbers.
+2. a text label must be entered for each set of coordinates and the label CANNOT be used more than once (although a pair of coordinates CAN be used more than once!!!)
+3. the user must declare that they intend to enter more than 1 set of coordinates (if they don't, there's not much use for this program)
+*/
+
+#include <stdio.h>
+#include<string.h>
+#include <math.h>
+//#define MAX 3 // defines how many structures there are
+
+struct Coordinate {
+    char text_label[20];
+    float x;
+    float y;
+};
+
+int pointDiff(int x1,int x2,int y1,int y2){
+    // calculating the distance between the points
+    return sqrt(pow(x1-x2,2) + pow(y1-y2,2));
+}
+
+int main () {
+    // MAX is the number of structures you want to enter
+    int MAX;
+    printf("Please enter how many pairs of x and y coordinates you have: ");
+    scanf("%d",&MAX);
+    struct Coordinate arr_Coordinate[MAX];
+    int index;
+    float pointDistance;
+    for(index = 0; index < MAX; index++ )
+    {
+        printf("\nPlease enter details of your coordinates %d\n\n", index+1);
+
+        printf("Please enter a text label for your pair: ");
+        scanf("%s", arr_Coordinate[index].text_label);
+
+        printf("Please enter your x: ");
+        scanf("%f", &arr_Coordinate[index].x);
+
+        printf("Please enter your y: ");
+        scanf("%f", &arr_Coordinate[index].y);
+    }
+   
+    
+    // structIndex1 is the first value of the maximum structure
+    // structIndex2 is the second value of the maximum structure
+    int maxDiff = 0,structIndex1=0,structIndex2=0;
+    // IndexA is the first value of the minimum structure
+    // IndexB is the second value of the minimum structure
+    int minDiff = 100000,IndexA=0,IndexB=0;
+    for(int outer=0; outer < MAX; outer++){
+        for( int inner = outer +1; inner < MAX; inner++){
+            if(inner != outer){
+                int value = pointDiff(arr_Coordinate[outer].x,arr_Coordinate[inner].x,arr_Coordinate[outer].y,arr_Coordinate[inner].y);
+                if (value > maxDiff) {
+                    maxDiff = value;
+                    structIndex1 = outer;
+                    structIndex1 = inner;
+                }
+                if (value < minDiff) {
+                    minDiff = value;
+                    IndexA = outer;
+                    IndexB = inner;
+                }
+                //printf("Comparing points (%.2f,%.2f) with point(%.2f,%.2f). Difference is : ",arr_Coordinate[outer].x,arr_Coordinate[outer].y,arr_Coordinate[inner].x,arr_Coordinate[inner].y);
+            }
+        }
+    }
+    printf("maxDiff is %d\n",maxDiff);
+    printf("These two points gave me the max Difference (%.2f,%.2f) and (%.2f,%.2f)\n",
+           arr_Coordinate[structIndex1].x,arr_Coordinate[structIndex1].y,
+           arr_Coordinate[structIndex2].x,arr_Coordinate[structIndex2].y);
+        printf("minDiff is %d\n",minDiff);
+    printf("These two points gave me the min Difference (%.2f,%.2f) and (%.2f,%.2f)\n",
+           arr_Coordinate[IndexA].x,arr_Coordinate[IndexA].y,
+           arr_Coordinate[IndexB].x,arr_Coordinate[IndexB].y);
+    
+
+    //pointDistance = sqrt(((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1))));
+    //scanf("%f", &arr_Coordinate.pointDistance);
+    
+    printf("Label:\tX:\tY:\n");
+
+    for(index = 0; index < MAX; index++ ) {
+        printf("%s\t%.2f\t%.2f\n", arr_Coordinate[index].text_label, arr_Coordinate[index].x, arr_Coordinate[index].y);
+    }
+    
+     return (0);
+}
